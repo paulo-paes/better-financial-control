@@ -1,8 +1,9 @@
-﻿using BetterFinancialControl.Infra;
-using BetterFinancialControl.Model;
-using Microsoft.EntityFrameworkCore;
+﻿using BetterFinancialControl.Model;
+using BetterFinancialControl.Utils;
+using SQLite;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,13 +12,29 @@ namespace BetterFinancialControl.Repository
 {
     public class UsuarioRepository
     {
-        public async void CreateUser(Usuario user)
+
+        private SQLiteConnection conn;
+        public UsuarioRepository() {
+            conn = new SQLiteConnection(Constantes.PathDB);
+        }
+        public void CriarUsuario(Usuario user)
         {
-            using var context = new AppDbContext();
+            conn.Insert(user);
+        }
 
-            await context.Usuarios.AddAsync(user);
+        public bool VerificarUsuario(string email, string senha)
+        {
+            string[] args =
+            [
+                email,
+                senha
+            ];
 
-            await context.SaveChangesAsync();
+            var user = conn.FindWithQuery<Usuario>("SELECT * FROM usuarios WHERE email = ? and senha = ?", args);
+
+
+            return !(user == null);
+
         }
     }
 }
