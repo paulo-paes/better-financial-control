@@ -22,26 +22,24 @@ namespace BetterFinancialControl.Repository
             DateTime endDate = new DateTime(date.Year, date.Month, DateTime.DaysInMonth(date.Year, date.Month), 23, 59, 59);
 
             var movs = conn.Table<Movimentacao>()
-                .Where(m => m.Data >= startDate && m.Data <= endDate && m.UserId == userId);
-            var despesas = movs.Where(m => m.Tipo == Tipo.Despesa).ToList();
-            var receitas = movs.Where(m => m.Tipo == Tipo.Receita).ToList();
+                .Where(m => m.Data >= startDate && m.Data <= endDate && m.UserId == userId)
+                .OrderByDescending(m => m.Data).ToList();
+            //var despesas = movs.Where(m => m.Tipo == Tipo.Despesa).ToList();
+            //var receitas = movs.Where(m => m.Tipo == Tipo.Receita).ToList();
             var categorias = conn.Table<Categoria>();
 
             Dashboard dash = new();
-            dash.Receitas = receitas;
-            dash.Despesas = despesas;
+            dash.Movimentacoes = movs;
             Decimal saldo = 0;
-            foreach ( var item in receitas )
+            foreach ( var item in movs )
             {
                 item.Categoria = categorias.Where(m => m.Id == item.CategoriaId).First();
-                saldo += item.Valor;
+                if (item.Tipo == Tipo.Receita)
+                {
+                    saldo += item.Valor;
+                } else { saldo -= item.Valor; }
             }
 
-            foreach ( var item in despesas )
-            {
-                item.Categoria = categorias.Where(m => m.Id == item.CategoriaId).First();
-                saldo -= item.Valor;
-            }
             dash.Saldo = saldo;
 
             return dash;

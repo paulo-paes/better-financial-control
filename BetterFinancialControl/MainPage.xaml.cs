@@ -48,8 +48,7 @@ namespace BetterFinancialControl
             DashboardRepository rep = new DashboardRepository();
             var dash = rep.Buscar(DateTime.Now, 1);
             lblSaldo.Text = dash.Saldo.ToString();
-            collectDespesa.ItemsSource = dash.Despesas;
-            collectReceita.ItemsSource = dash.Receitas;
+            collectDespesa.ItemsSource = dash.Movimentacoes;
         }
 
         private void Button_Clicked_3(object sender, EventArgs e)

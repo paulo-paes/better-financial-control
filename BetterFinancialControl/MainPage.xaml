@@ -29,20 +29,6 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-            <Label Text="Receita" />
-            <CollectionView x:Name="collectReceita">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid ColumnDefinitions="*, 2*, *, *, *">
-                            <Label Grid.Column="0" Text="{Binding Id}" />
-                            <Label Grid.Column="1" Text="{Binding Description}" />
-                            <Label Grid.Column="2" Text="{Binding Valor}" />
-                            <Label Grid.Column="3" Text="{Binding Categoria.Nome}" />
-                            <Label Grid.Column="4" Text="{Binding Data}" />
-                        </Grid>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
         </VerticalStackLayout>
     </ScrollView>
 
