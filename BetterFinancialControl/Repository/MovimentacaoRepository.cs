@@ -16,14 +16,15 @@ namespace BetterFinancialControl.Repository
             conn = new SQLiteConnection(Constantes.PathDB);
         }
 
-        public void Criar(Movimentacao mov)
+        public void Criar(Movimentacao mov, int userId)
         {
+            mov.UserId = userId;
             conn.Insert(mov);
         }
 
-        public List<Movimentacao> Buscar()
+        public List<Movimentacao> Buscar(int userId)
         {
-            return conn.Table<Movimentacao>().ToList();
+            return conn.Table<Movimentacao>().Where(m => m.UserId == userId).ToList();
         }
 
         public void Atualizar(Movimentacao mov)
@@ -51,9 +52,9 @@ namespace BetterFinancialControl.Repository
             conn.Delete<Movimentacao>(id);
         }
 
-        public List<Movimentacao> BuscarPorTipo(Tipo tipo)
+        public List<Movimentacao> BuscarPorTipo(Tipo tipo, int userId)
         {
-            return conn.Table<Movimentacao>().ToList().Where(m => m.Tipo == tipo).ToList();
+            return conn.Table<Movimentacao>().ToList().Where(m => m.Tipo == tipo && m.UserId == userId).ToList();
         }
     }
 }

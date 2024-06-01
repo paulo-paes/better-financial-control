@@ -16,14 +16,15 @@ namespace BetterFinancialControl.Repository
         {
             conn = new SQLiteConnection(Constantes.PathDB);
         }
-        public void Criar(Categoria categoria)
+        public void Criar(Categoria categoria, int userId)
         {
+            categoria.UserId = userId;
             conn.Insert(categoria);
         }
 
-        public List<Categoria> Buscar()
+        public List<Categoria> Buscar(int userId)
         {
-            return conn.Table<Categoria>().ToList();
+            return conn.Table<Categoria>().Where(c => c.UserId == userId).ToList();
         }
 
         public void Atualizar(Categoria categoria)

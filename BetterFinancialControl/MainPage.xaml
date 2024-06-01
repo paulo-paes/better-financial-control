@@ -7,6 +7,7 @@
     <ScrollView>
         <VerticalStackLayout Padding="30,0" Spacing="25">
             <Label>Teste!</Label>
+            <Button Clicked="Button_Clicked_4" Text="Criar Usuario" />
             <Button Clicked="Button_Clicked" Text="Criar Categoria" />
             <Button Clicked="Button_Clicked_1" Text="Criar Receita" />
 

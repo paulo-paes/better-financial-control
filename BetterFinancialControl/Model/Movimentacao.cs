@@ -21,6 +21,8 @@ namespace BetterFinancialControl.Model
 
         public int CategoriaId { get; set; }
 
+        public int UserId { get; set; }
+
         [Ignore]
         public Categoria Categoria { get; set; }
 
