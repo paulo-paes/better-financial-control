@@ -7,7 +7,7 @@ namespace BetterFinancialControl
         {
             InitializeComponent();
 
-            MainPage = new Login();
+            MainPage = new NavigationPage(new Login());
         }
     }
 }
