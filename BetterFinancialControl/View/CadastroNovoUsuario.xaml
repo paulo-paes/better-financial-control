@@ -5,12 +5,12 @@
              Title="">
     <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
         <Label Text="Cadastrar-se" FontSize="30" FontAttributes="Bold" Margin="-5,100,0,40"/>
-        <Label Text="Login" Margin="6,0,0,-5"/>
-        <Entry Placeholder="Digite seu login" HorizontalOptions="Center" WidthRequest="250" Margin="0,0,0,30"/>
+        <Label Text="E-mail" Margin="6,0,0,-5"/>
+        <Entry Placeholder="Digite seu login" HorizontalOptions="Center" WidthRequest="250" Margin="0,0,0,30" x:Name="EmailEntry"/>
         <Label Text="Senha" Margin="6,0,0,-5"/>
-        <Entry Placeholder="Digite sua senha" IsPassword="True" HorizontalOptions="Center" WidthRequest="250" Margin="0,0,0,30"/>
+        <Entry Placeholder="Digite sua senha" IsPassword="True" HorizontalOptions="Center" WidthRequest="250" Margin="0,0,0,30" x:Name="SenhaEntry"/>
         <Label Text="Confirme a senha" Margin="6,0,0,-5"/>
-        <Entry Placeholder="Digite sua senha" IsPassword="True" HorizontalOptions="Center" WidthRequest="250" Margin="0,0,0,40"/>
+        <Entry Placeholder="Digite sua senha" IsPassword="True" HorizontalOptions="Center" WidthRequest="250" Margin="0,0,0,40" x:Name="ConfirmarSenhaEntry"/>
 
         <Button x:Name="CadastrarBtn" Text="Cadastrar-se" WidthRequest="110" Margin="150,0,0,180" CornerRadius="20" Clicked="CadastrarBtn_Clicked"/>
 

@@ -1,20 +1,33 @@
+using BetterFinancialControl.Repository;
+
 namespace BetterFinancialControl.View;
 
 public partial class Login : ContentPage
 {
 	public bool ValidarLogin()
     {
-        if (LoginEntry.Text == "" || SenhaEntry.Text == "" || LoginEntry.Text == null || SenhaEntry.Text == null) 
+        var usuario = new UsuarioRepository();
+        if (!(LoginEntry.Text == "" || SenhaEntry.Text == "" || LoginEntry.Text == null || SenhaEntry.Text == null)) 
+        {
+            try
+            {
+                return usuario.VerificarUsuario(LoginEntry.Text, SenhaEntry.Text);
+            }
+            catch (Exception e) {
+                DisplayAlert("Erro", e.Message,"OK");
+            }               
+        }
+        else
         {
             DisplayAlert("Campos em branco", "Preencha os campos de login e senha!!", "OK");
             return false;
-            
         }
-        return true;
+        return false;
     }
     public Login()
 	{
 		InitializeComponent();
+        
 	}
 
     private async void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
