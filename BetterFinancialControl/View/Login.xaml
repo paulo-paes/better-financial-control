@@ -5,6 +5,7 @@
              Title="">
 
     <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+        <Image Source="Resources\Images\logo.jpeg"/>
         <Label Text="Entrar" FontSize="30" FontAttributes="Bold" Margin="0,100,0,0" />
         <Label Text="Preencha os dados de Login" Opacity="0.5" FontSize="18" Margin="0,0,0,80" />
         <Label Text="Login" Margin="0,0,0,-5"/>
