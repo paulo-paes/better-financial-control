@@ -48,11 +48,11 @@ public partial class CadastroNovoUsuario : ContentPage
 		return false;
 	}
 
-    private void CadastrarBtn_Clicked(object sender, EventArgs e)
+    private async void CadastrarBtn_Clicked(object sender, EventArgs e)
     {
 		if (ValidarCampos())
 		{
-			DisplayAlert("Sucesso", "Novo Login cadastrado com sucesso", "OK");
+            await Navigation.PopAsync();
 		}
     }
 }

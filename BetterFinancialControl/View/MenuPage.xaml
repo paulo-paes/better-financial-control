@@ -8,6 +8,6 @@
     Title="TabbedPage"
     android:TabbedPage.ToolbarPlacement="Bottom">
     <local:Dashboard Title="Dashboard" IconImageSource="gauge_solid.svg" />
-    <local:Movimentacao Title="Movimentação" IconImageSource="plus_solid.svg" />
+    <local:CadastroMovimentacao Title="Movimentação" IconImageSource="plus_solid.svg" />
     <local:Categorias Title="Categorias" IconImageSource="list_solid.svg" />
 </TabbedPage>

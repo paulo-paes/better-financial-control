@@ -1,13 +1,29 @@
+using BetterFinancialControl.Model;
 using BetterFinancialControl.Repository;
+using SQLite;
+using BetterFinancialControl.Utils;
+using CommunityToolkit.Maui.Alerts;
 
 namespace BetterFinancialControl.View;
 
 public partial class Login : ContentPage
 {
-	public bool ValidarLogin()
+    SQLiteConnection connection;
+    public Login()
+    {
+        InitializeComponent();
+
+        connection = new SQLiteConnection(Constantes.PathDB);
+        connection.CreateTable<Usuario>();
+        connection.CreateTable<Categoria>();
+        connection.CreateTable<Movimentacao>();
+
+    }
+
+    public bool ValidarLogin()
     {
         var usuario = new UsuarioRepository();
-        if (!(LoginEntry.Text == "" || SenhaEntry.Text == "" || LoginEntry.Text == null || SenhaEntry.Text == null)) 
+        if (!(string.IsNullOrEmpty(LoginEntry.Text)|| string.IsNullOrEmpty(SenhaEntry.Text))) 
         {
             try
             {
@@ -24,12 +40,7 @@ public partial class Login : ContentPage
         }
         return false;
     }
-    public Login()
-	{
-		InitializeComponent();
-        
-	}
-
+    
     private async void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
     {
         await Navigation.PushAsync(new CadastroNovoUsuario());
@@ -39,7 +50,15 @@ public partial class Login : ContentPage
     {
         if (ValidarLogin())
         {
-            await Navigation.PushAsync(new MenuPage());
+            if (App.Current != null)
+            {
+                App.Current.MainPage = new MenuPage();
+            }
+        }
+        else
+        {
+            var toast = Toast.Make("Login ou senha inválidos");
+            await toast.Show();
         }
     }
 }
