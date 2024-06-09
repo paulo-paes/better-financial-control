@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BetterFinancialControl.Model
 {
-    public class Dashboard
+    public class DashboardModel
     {
         public Decimal Saldo { get; set; }
 

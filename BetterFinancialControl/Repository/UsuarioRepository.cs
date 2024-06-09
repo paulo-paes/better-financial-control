@@ -22,7 +22,7 @@ namespace BetterFinancialControl.Repository
             conn.Insert(user);
         }
 
-        public bool VerificarUsuario(string email, string senha)
+        public Usuario ObterUsuario(string email, string senha)
         {
             string[] args =
             [
@@ -30,11 +30,7 @@ namespace BetterFinancialControl.Repository
                 senha
             ];
 
-            var user = conn.FindWithQuery<Usuario>("SELECT * FROM usuarios WHERE email = ? and senha = ?", args);
-
-
-            return !(user == null);
-
+            return conn.FindWithQuery<Usuario>("SELECT * FROM usuarios WHERE email = ? and senha = ?", args);
         }
     }
 }
