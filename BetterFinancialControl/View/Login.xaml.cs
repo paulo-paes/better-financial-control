@@ -20,14 +20,14 @@ public partial class Login : ContentPage
 
     }
 
-    public bool ValidarLogin()
+    public Usuario ValidarLogin()
     {
         var usuario = new UsuarioRepository();
         if (!(string.IsNullOrEmpty(LoginEntry.Text)|| string.IsNullOrEmpty(SenhaEntry.Text))) 
         {
             try
             {
-                return usuario.VerificarUsuario(LoginEntry.Text, SenhaEntry.Text);
+                return usuario.ObterUsuario(LoginEntry.Text, SenhaEntry.Text);
             }
             catch (Exception e) {
                 DisplayAlert("Erro", e.Message,"OK");
@@ -36,9 +36,9 @@ public partial class Login : ContentPage
         else
         {
             DisplayAlert("Campos em branco", "Preencha os campos de login e senha!!", "OK");
-            return false;
+            return null;
         }
-        return false;
+        return null;
     }
     
     private async void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
@@ -48,11 +48,12 @@ public partial class Login : ContentPage
 
     private async void EntrarBtn_Clicked(object sender, EventArgs e)
     {
-        if (ValidarLogin())
+       Usuario usuarioAtual = ValidarLogin();
+        if (usuarioAtual != null)
         {
             if (App.Current != null)
             {
-                App.Current.MainPage = new MenuPage();
+                App.Current.MainPage = new MenuPage(usuarioAtual);
             }
         }
         else
