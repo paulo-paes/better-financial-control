@@ -10,6 +10,8 @@ namespace BetterFinancialControl.Model
     {
         public Decimal Saldo { get; set; }
 
+        public Decimal Balanco { get; set; }
+
         public List<Movimentacao> Movimentacoes { get; set; }
     }
 }
