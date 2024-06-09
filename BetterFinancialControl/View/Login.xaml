@@ -16,7 +16,7 @@
 
         <HorizontalStackLayout VerticalOptions="End" HorizontalOptions="CenterAndExpand">
             <Label Text="Não tem uma conta?" />
-            <Label Text="Cadastra-se" TextColor="Purple" Margin="5,0,0,0">
+            <Label Text="Cadastre-se" TextColor="Purple" Margin="5,0,0,0">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
                 </Label.GestureRecognizers>
