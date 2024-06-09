@@ -33,7 +33,7 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <Grid Padding="10">
+                        <Grid>
 
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />

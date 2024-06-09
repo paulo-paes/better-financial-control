@@ -1,12 +1,70 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="BetterFinancialControl.View.CadastroMovimentacao"
-             Title="CadastroMovimentacao">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+<ContentPage
+    x:Class="BetterFinancialControl.View.CadastroMovimentacao"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="CadastroMovimentacao"
+    Padding="20"
+    Loaded="ContentPage_Loaded">
+    <ScrollView>
+        <VerticalStackLayout>
+            <Entry
+                x:Name="EntryDescricao"
+                Margin="0,0,0,15"
+                Placeholder="Descrição" />
+
+            <HorizontalStackLayout Margin="0,0,0,15" HorizontalOptions="StartAndExpand">
+                <Label
+                    Margin="0,0,15,0"
+                    Text="Data"
+                    VerticalOptions="Center" />
+                <DatePicker x:Name="DataMovimentacao" Date="{Binding SelectedDate}" />
+            </HorizontalStackLayout>
+
+            <Entry
+                x:Name="EntryValor"
+                Margin="0,0,0,15"
+                Keyboard="Numeric"
+                Placeholder="Valor" />
+
+            <HorizontalStackLayout VerticalOptions="Start">
+                <Label Text="Despesa" VerticalOptions="Center" />
+                <Switch
+                    x:Name="SwitchTipo"
+                    IsToggled="True"
+                    VerticalOptions="Center" />
+                <Label Text="Receita" VerticalOptions="Center" />
+            </HorizontalStackLayout>
+
+            <Picker
+                x:Name="PickerForma"
+                Title="Selecione a forma de pagamento"
+                Margin="0,15,0,0">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Pix</x:String>
+                        <x:String>Crédito</x:String>
+                        <x:String>Dinheiro</x:String>
+                        <x:String>Debito</x:String>
+                        <x:String>Transferencia</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+
+            <Picker
+                x:Name="PickerCategoria"
+                Title="Selecione uma categoria"
+                Margin="0,15,0,0"
+                ItemDisplayBinding="{Binding Nome}" />
+
+            <Button
+                x:Name="BtnSalvar"
+                Margin="0,30,0,0"
+                BackgroundColor="DarkGreen"
+                Clicked="BtnSalvar_Clicked"
+                Text="Salvar"
+                TextColor="White" />
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
