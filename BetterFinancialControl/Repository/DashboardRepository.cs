@@ -16,7 +16,7 @@ namespace BetterFinancialControl.Repository
             conn = new SQLiteConnection(Constantes.PathDB);
         }
 
-        public Dashboard Buscar(DateTime date, int userId)
+        public DashboardModel Buscar(DateTime date, int userId)
         {
             DateTime startDate = new DateTime(date.Year, date.Month, 1, 0, 0, 0);
             DateTime endDate = new DateTime(date.Year, date.Month, DateTime.DaysInMonth(date.Year, date.Month), 23, 59, 59);
@@ -28,7 +28,7 @@ namespace BetterFinancialControl.Repository
             //var receitas = movs.Where(m => m.Tipo == Tipo.Receita).ToList();
             var categorias = conn.Table<Categoria>();
 
-            Dashboard dash = new();
+            DashboardModel dash = new();
             dash.Movimentacoes = movs;
             Decimal saldo = 0;
             foreach ( var item in movs )
