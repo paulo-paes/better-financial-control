@@ -15,7 +15,8 @@ public partial class Dashboard : ContentPage
 	public void BuscarDados(DateTime date)
 	{
         var repository = new DashboardRepository();
-        dash = repository.Buscar(date, 1);
+        var menuPage = App.Current?.MainPage as MenuPage;
+        dash = repository.Buscar(date, menuPage!.usuarioAtual.Id);
         lblSaldo.Text = dash.Saldo.ToString();
         lblBalanco.Text = dash.Balanco.ToString();
         dashboardView.ItemsSource = dash.Movimentacoes;
@@ -24,7 +25,8 @@ public partial class Dashboard : ContentPage
     public void BuscarDados()
     {
         var repository = new DashboardRepository();
-        dash = repository.Buscar(DateTime.Now, 1);
+        var menuPage = App.Current?.MainPage as MenuPage;
+        dash = repository.Buscar(DateTime.Now, menuPage!.usuarioAtual.Id);
         lblSaldo.Text = dash.Saldo.ToString();
 
         lblBalanco.Text = dash.Balanco.ToString();
