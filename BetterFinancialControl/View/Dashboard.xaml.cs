@@ -44,4 +44,18 @@ public partial class Dashboard : ContentPage
 
         BuscarDados();
     }
+
+    private async void Tap_Tapped(object sender, TappedEventArgs e)
+    {
+        var grid = (Grid)sender;
+        if(grid.BindingContext is Movimentacao m)
+        {
+            await Navigation.PushModalAsync(new CadastroMovimentacao(m));
+        }
+    }
+
+    private void ContentPage_Focused(object sender, FocusEventArgs e)
+    {
+        BuscarDados();
+    }
 }

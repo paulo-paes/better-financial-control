@@ -8,6 +8,8 @@ namespace BetterFinancialControl.View
     public partial class CadastroMovimentacao : ContentPage
     {
         DateTime SelectedDate = DateTime.Now;
+        private bool editionMode = false;
+        private Movimentacao editMov;
 
         public CadastroMovimentacao()
         {
@@ -17,22 +19,8 @@ namespace BetterFinancialControl.View
         public CadastroMovimentacao(Movimentacao mov)
         {
             InitializeComponent();
-
-            EntryDescricao.Text = mov.Description;
-            EntryValor.Text = mov.Valor.ToString();
-            SwitchTipo.IsToggled = mov.Tipo == Tipo.Receita ? true : false;
-            PickerForma.ItemsSource.IndexOf(mov.FormaDePagamento);
-
-            int i = 0;
-            foreach (Categoria item in PickerCategoria.ItemsSource)
-            {
-                if (item.Id == mov.CategoriaId)
-                {
-                    PickerCategoria.SelectedIndex = i;
-                    break;
-                }
-                i++;
-            }
+            editionMode = true;
+            editMov = mov;
         }
 
         public void CarregarCategorias()
@@ -43,9 +31,26 @@ namespace BetterFinancialControl.View
             PickerCategoria.ItemsSource = categorias;
         }
 
-        private void ContentPage_Loaded(object sender, EventArgs e)
+        private async void ContentPage_Loaded(object sender, EventArgs e)
         {
             CarregarCategorias();
+
+            EntryDescricao.Text = editMov.Description;
+            EntryValor.Text = editMov.Valor.ToString();
+            SwitchTipo.IsToggled = editMov.Tipo == Tipo.Receita ? true : false;
+            PickerForma.ItemsSource.IndexOf(editMov.FormaDePagamento);
+            SelectedDate = editMov.Data;
+
+            int i = 0;
+            foreach (Categoria item in PickerCategoria.ItemsSource)
+            {
+                if (item.Id == editMov.CategoriaId)
+                {
+                    PickerCategoria.SelectedIndex = i;
+                    break;
+                }
+                i++;
+            }
         }
 
         private async void BtnSalvar_Clicked(object sender, EventArgs e)
@@ -87,6 +92,13 @@ namespace BetterFinancialControl.View
 
             var repository = new MovimentacaoRepository();
             var menuPage = App.Current!.MainPage as MenuPage;
+            if (editionMode)
+            {
+                mov.Id = editMov.Id;
+                repository.Atualizar(mov);
+                await Navigation.PopModalAsync();
+                return;
+            }
             repository.Criar(mov, menuPage!.usuarioAtual.Id);
             Limpar();
             menuPage.CurrentPage = menuPage.Children[0];

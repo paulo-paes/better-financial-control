@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     Title="Dashboard"
     Padding="20"
+    Focused="ContentPage_Focused"
     Loaded="ContentPage_Loaded">
     <VerticalStackLayout>
         <VerticalStackLayout>
@@ -34,7 +35,9 @@
                 <DataTemplate>
                     <ViewCell>
                         <Grid>
-
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer x:Name="Tap" Tapped="Tap_Tapped" />
+                            </Grid.GestureRecognizers>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="Auto" />
