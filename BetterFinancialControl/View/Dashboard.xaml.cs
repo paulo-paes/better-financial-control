@@ -35,8 +35,7 @@ public partial class Dashboard : ContentPage
 
     private void PickerMonth_DateSelected(object sender, DateChangedEventArgs e)
     {
-        DateTime selectedDate = e.NewDate;
-        BuscarDados(selectedDate);
+        BuscarDados(e.NewDate);
     }
 
     private void ContentPage_Loaded(object sender, EventArgs e)
@@ -47,11 +46,27 @@ public partial class Dashboard : ContentPage
 
     private async void Tap_Tapped(object sender, TappedEventArgs e)
     {
-        var grid = (Grid)sender;
-        if(grid.BindingContext is Movimentacao m)
-        {
-            await Navigation.PushModalAsync(new CadastroMovimentacao(m));
-        }
+        var retorno = await DisplayActionSheet(
+            "Editar ou Remover?", "Voltar", null, "Editar", "Remover");
+        if (retorno != null) {
+            if (retorno == "Remover")
+            {
+                var grid = (Grid)sender;
+                if (grid.BindingContext is Movimentacao m)
+                {
+                    var repository = new MovimentacaoRepository();
+                    repository.Excluir(m.Id);
+                    BuscarDados();
+                }
+            } else
+            {
+                var grid = (Grid)sender;
+                if (grid.BindingContext is Movimentacao m)
+                {
+                    await Navigation.PushModalAsync(new CadastroMovimentacao(m));
+                }
+            }
+        } 
     }
 
     private void ContentPage_Focused(object sender, FocusEventArgs e)

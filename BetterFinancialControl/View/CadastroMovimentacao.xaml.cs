@@ -1,6 +1,7 @@
 using BetterFinancialControl.Model;
 using BetterFinancialControl.Repository;
 using Microsoft.Maui.Controls;
+using Microsoft.Maui.Platform;
 using System;
 
 namespace BetterFinancialControl.View
@@ -35,21 +36,24 @@ namespace BetterFinancialControl.View
         {
             CarregarCategorias();
 
-            EntryDescricao.Text = editMov.Description;
-            EntryValor.Text = editMov.Valor.ToString();
-            SwitchTipo.IsToggled = editMov.Tipo == Tipo.Receita ? true : false;
-            PickerForma.ItemsSource.IndexOf(editMov.FormaDePagamento);
-            SelectedDate = editMov.Data;
-
-            int i = 0;
-            foreach (Categoria item in PickerCategoria.ItemsSource)
+            if (editionMode)
             {
-                if (item.Id == editMov.CategoriaId)
+                EntryDescricao.Text = editMov.Description;
+                EntryValor.Text = editMov.Valor.ToString();
+                SwitchTipo.IsToggled = editMov.Tipo == Tipo.Receita;
+                PickerForma.SelectedIndex = PickerForma.ItemsSource.IndexOf(editMov.FormaDePagamento.ToString());
+                DataMovimentacao.Date = editMov.Data;
+
+                int i = 0;
+                foreach (Categoria item in PickerCategoria.ItemsSource)
                 {
-                    PickerCategoria.SelectedIndex = i;
-                    break;
+                    if (item.Id == editMov.CategoriaId)
+                    {
+                        PickerCategoria.SelectedIndex = i;
+                        break;
+                    }
+                    i++;
                 }
-                i++;
             }
         }
 
@@ -87,7 +91,7 @@ namespace BetterFinancialControl.View
                 Tipo = SwitchTipo.IsToggled ? Tipo.Receita : Tipo.Despesa,
                 Valor = valor,
                 Description = EntryDescricao.Text,
-                Data = SelectedDate,
+                Data = DataMovimentacao.Date,
             };
 
             var repository = new MovimentacaoRepository();
@@ -108,7 +112,7 @@ namespace BetterFinancialControl.View
         {
             EntryDescricao.Text = "";
             EntryValor.Text = "";
-            SelectedDate = DateTime.Now;
+            DataMovimentacao.Date = DateTime.Now;
             PickerForma.SelectedItem = null;
             PickerCategoria.SelectedItem = null;
         }
@@ -130,11 +134,6 @@ namespace BetterFinancialControl.View
                 default:
                     throw new Exception("Escolha de forma de pagamento inválida");
             }
-        }
-
-        private void DataMovimentacao_DateSelected(object sender, DateChangedEventArgs e)
-        {
-            this.SelectedDate = e.NewDate;
         }
     }
 }

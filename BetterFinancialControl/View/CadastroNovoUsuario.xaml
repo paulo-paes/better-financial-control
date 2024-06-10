@@ -1,20 +1,49 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="BetterFinancialControl.View.CadastroNovoUsuario"
-             Title="">
-    <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
-        <Label Text="Cadastrar-se" FontSize="30" FontAttributes="Bold" Margin="-5,100,0,40"/>
-        <Label Text="E-mail" Margin="6,0,0,5"/>
-        <Entry Placeholder="Digite seu login" HorizontalOptions="Center" WidthRequest="250" Margin="0,0,0,30" x:Name="EmailEntry"/>
-        <Label Text="Senha" Margin="6,0,0,5"/>
-        <Entry Placeholder="Digite sua senha" IsPassword="True" HorizontalOptions="Center" WidthRequest="250" Margin="0,0,0,30" x:Name="SenhaEntry"/>
-        <Label Text="Confirme a senha" Margin="6,0,0,5"/>
-        <Entry Placeholder="Digite sua senha" IsPassword="True" HorizontalOptions="Center" WidthRequest="250" Margin="0,0,0,40" x:Name="ConfirmarSenhaEntry"/>
+<ContentPage
+    x:Class="BetterFinancialControl.View.CadastroNovoUsuario"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="">
+    <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+        <Label
+            Margin="-5,100,0,40"
+            FontAttributes="Bold"
+            FontSize="30"
+            Text="Cadastrar-se" />
+        <Label Margin="6,0,0,5" Text="E-mail" />
+        <Entry
+            x:Name="EmailEntry"
+            Margin="0,0,0,30"
+            HorizontalOptions="Center"
+            Placeholder="Digite seu login"
+            WidthRequest="250" />
+        <Label Margin="6,0,0,5" Text="Senha" />
+        <Entry
+            x:Name="SenhaEntry"
+            Margin="0,0,0,30"
+            HorizontalOptions="Center"
+            IsPassword="True"
+            Placeholder="Digite sua senha"
+            WidthRequest="250" />
+        <Label Margin="6,0,0,5" Text="Confirme a senha" />
+        <Entry
+            x:Name="ConfirmarSenhaEntry"
+            Margin="0,0,0,40"
+            HorizontalOptions="Center"
+            IsPassword="True"
+            Placeholder="Digite sua senha"
+            WidthRequest="250" />
 
-        <Button x:Name="CadastrarBtn" Text="Cadastrar-se" WidthRequest="110" Margin="150,0,0,180" CornerRadius="20" Clicked="CadastrarBtn_Clicked"/>
+        <Button
+            x:Name="CadastrarBtn"
+            Margin="150,0,0,180"
+            BackgroundColor="Green"
+            Clicked="CadastrarBtn_Clicked"
+            CornerRadius="20"
+            Text="Cadastrar-se"
+            WidthRequest="110" />
 
-    
+
     </StackLayout>
-    
+
 </ContentPage>

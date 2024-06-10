@@ -6,7 +6,8 @@
     xmlns:android="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.AndroidSpecific;assembly=Microsoft.Maui.Controls"
     xmlns:local="clr-namespace:BetterFinancialControl.View"
     Title="TabbedPage"
-    android:TabbedPage.ToolbarPlacement="Bottom">
+    android:TabbedPage.ToolbarPlacement="Bottom"
+    SelectedTabColor="Green">
     <local:Dashboard Title="Dashboard" IconImageSource="gauge_solid.svg" />
     <local:CadastroMovimentacao Title="Movimentação" IconImageSource="plus_solid.svg" />
     <local:Categorias Title="Categorias" IconImageSource="list_solid.svg" />
