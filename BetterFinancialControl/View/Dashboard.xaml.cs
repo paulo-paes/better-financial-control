@@ -58,7 +58,7 @@ public partial class Dashboard : ContentPage
                     repository.Excluir(m.Id);
                     BuscarDados();
                 }
-            } else
+            } else if(retorno == "Editar")
             {
                 var grid = (Grid)sender;
                 if (grid.BindingContext is Movimentacao m)

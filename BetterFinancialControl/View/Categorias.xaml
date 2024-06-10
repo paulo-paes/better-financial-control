@@ -6,34 +6,49 @@
              Loaded="ContentPage_Loaded">
     
     <ScrollView HorizontalOptions="Center">
-        <VerticalStackLayout HorizontalOptions="Center" Padding="20">
-            <Label Text="CATEGORIAS" 
-               FontSize="25" 
-               FontAttributes="Bold" 
-               HorizontalTextAlignment="Center"/>
+        <VerticalStackLayout HorizontalOptions="Center" Padding="16">
+            <HorizontalStackLayout HorizontalOptions="Center" Padding="10">
+                <Label Text="CATEGORIAS" 
+                       FontSize="25" 
+                       FontAttributes="Bold" 
+                       HorizontalTextAlignment="Center"
+                       Padding="5"/>
+                
+                <Button Text="+"
+                        x:Name="adicionarCategoriaBtn"
+                        Clicked="adicionarCategoriaBtn_Clicked"
+                        BackgroundColor="DarkSlateGrey"
+                        TextColor="White"
+                        Margin="10,0,0,0"
+                        />
+            </HorizontalStackLayout>
 
-            <StackLayout>
-                <ListView x:Name="categoriaListView" Margin="0,10,0,0">
-                    <ListView.ItemTemplate >
-                        <DataTemplate>
-                            <ViewCell>
-                                <HorizontalStackLayout HorizontalOptions="Center" >
-                                    <Label Text="{Binding Nome}" Padding="5"/>
-                                </HorizontalStackLayout>
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-            </StackLayout>
 
-            <Button Text="Adicionar nova categoria"
-                x:Name="adicionarCategoriaBtn"
-                Clicked="adicionarCategoriaBtn_Clicked"
-                BackgroundColor="Green"
-                TextColor="White"
-                WidthRequest="300"
-                Margin="0,10,0,0"/>
 
+            <ListView x:Name="categoriaListView" Margin="0,10,0,0">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer x:Name="Tap" Tapped="Tap_Tapped" />
+                                </Grid.GestureRecognizers>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Label
+                                    HorizontalOptions="Center"
+                                    Text="{Binding Nome}" />
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </VerticalStackLayout>
    </ScrollView>
 </ContentPage>
