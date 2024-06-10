@@ -119,5 +119,10 @@ namespace BetterFinancialControl.View
                     throw new Exception("Escolha de forma de pagamento inválida");
             }
         }
+
+        private void DataMovimentacao_DateSelected(object sender, DateChangedEventArgs e)
+        {
+            this.SelectedDate = e.NewDate;
+        }
     }
 }
