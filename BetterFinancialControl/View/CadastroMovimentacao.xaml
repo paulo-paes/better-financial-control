@@ -46,7 +46,7 @@
                         <x:String>Crédito</x:String>
                         <x:String>Dinheiro</x:String>
                         <x:String>Debito</x:String>
-                        <x:String>Transferencia</x:String>
+                        <x:String>Transferência</x:String>
                     </x:Array>
                 </Picker.ItemsSource>
             </Picker>
