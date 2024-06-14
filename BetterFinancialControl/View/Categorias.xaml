@@ -42,7 +42,9 @@
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
                                 <Label
+                                    Padding="10"
                                     HorizontalOptions="Center"
+                                    VerticalOptions="Center"
                                     Text="{Binding Nome}" />
                             </Grid>
                         </ViewCell>

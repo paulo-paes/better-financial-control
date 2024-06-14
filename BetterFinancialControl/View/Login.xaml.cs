@@ -35,7 +35,8 @@ public partial class Login : ContentPage
         }
         else
         {
-            DisplayAlert("Campos em branco", "Preencha os campos de login e senha!!", "OK");
+            var toast = Toast.Make("Preencha os campos de login e senha!!");
+            toast.Show();
             return null;
         }
         return null;

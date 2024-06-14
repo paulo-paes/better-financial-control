@@ -1,5 +1,6 @@
 using BetterFinancialControl.Model;
 using BetterFinancialControl.Repository;
+using CommunityToolkit.Maui.Alerts;
 using System.ComponentModel;
 
 namespace BetterFinancialControl.View;
@@ -14,7 +15,20 @@ public partial class Categorias : ContentPage
 
 
 	
-
+    public bool verificarCategoriaJaCadastrada(string categoriaNome)
+    {
+        MenuPage menuPage = App.Current?.MainPage as MenuPage;
+        CategoriaRepository categoriaRepository = new CategoriaRepository();
+        List<Categoria> categoriasCadastradas = new List<Categoria>();
+        foreach (Categoria i in categoriaRepository.Buscar(menuPage.usuarioAtual.Id))
+        {
+            if (i.Nome.Equals(categoriaNome))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
     private async void adicionarCategoriaBtn_Clicked(object sender, EventArgs e)
     {
         CategoriaRepository categoriaRepository = new CategoriaRepository();
@@ -26,18 +40,27 @@ public partial class Categorias : ContentPage
       
         if (categoriaDescricao != null)
         {
-            var novaCategoria = new Categoria();
-            novaCategoria.UserId = menuPage.usuarioAtual.Id;
-            novaCategoria.Nome = categoriaDescricao;
-
-            try
-            { 
-                categoriaRepository.Criar(novaCategoria, menuPage.usuarioAtual.Id);
-            }
-            catch(Exception ex)
+            if(verificarCategoriaJaCadastrada(categoriaDescricao) != true)
             {
-                DisplayAlert("ERRO", ex.Message, "OK");
+                var novaCategoria = new Categoria();
+                novaCategoria.UserId = menuPage.usuarioAtual.Id;
+                novaCategoria.Nome = categoriaDescricao;
+
+                try
+                {
+                    categoriaRepository.Criar(novaCategoria, menuPage.usuarioAtual.Id);
+                }
+                catch (Exception ex)
+                {
+                    DisplayAlert("ERRO", ex.Message, "OK");
+                }
             }
+            else
+            {
+                var toast = Toast.Make("Categoria já cadastrada");
+                toast.Show();
+            }
+            
         }
         listarCategorias();
     }

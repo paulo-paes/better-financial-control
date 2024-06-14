@@ -1,6 +1,7 @@
 using BetterFinancialControl.Repository;
 using System.Xml.Schema;
 using BetterFinancialControl.Model;
+using CommunityToolkit.Maui.Alerts;
 
 namespace BetterFinancialControl.View;
 
@@ -27,21 +28,31 @@ public partial class CadastroNovoUsuario : ContentPage
 		{
             if (SenhaEntry.Text.Equals(ConfirmarSenhaEntry.Text))
             {
-                usuario.Email = EmailEntry.Text;
-                usuario.Senha = SenhaEntry.Text;
-                try
+                if (repoUsuario.ObterUsuario(usuario.Email, usuario.Senha) == null)
                 {
-                    repoUsuario.CriarUsuario(usuario);
-                    return true;
+                    usuario.Email = EmailEntry.Text;
+                    usuario.Senha = SenhaEntry.Text;
+                    try
+                    {
+                        repoUsuario.CriarUsuario(usuario);
+                        return true;
+                    }
+                    catch (Exception ex)
+                    {
+                        DisplayAlert("Erro", ex.Message, "OK");
+                    }
                 }
-                catch (Exception ex)
+                else
                 {
-                    DisplayAlert("Erro", ex.Message, "OK");
+                    var toast = Toast.Make("Usuário já cadastrado");
+                    toast.Show();
                 }
+                
             }
             else
             {
-                DisplayAlert("Senha Incorreta", "As senhas não coincidem, preencha os campos novamente", "OK");
+                var toast = Toast.Make("As senhas não coincidem, preencha os campos novamente");
+                toast.Show();
             }
             
         }

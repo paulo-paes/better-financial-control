@@ -8,6 +8,6 @@ public partial class MenuPage : TabbedPage
 	public MenuPage(Usuario usuarioAtual)
     {
 		this.usuarioAtual = usuarioAtual;
-		InitializeComponent();
+        InitializeComponent();
 	}
 }

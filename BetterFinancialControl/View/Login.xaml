@@ -6,9 +6,9 @@
     Title="">
 
     <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-        <Image Source="logo.jpeg" WidthRequest="150" />
+        
         <Label
-            Margin="0,10,0,0"
+            Margin="0,70,0,0"
             FontAttributes="Bold"
             FontSize="30"
             Text="Entrar" />
@@ -35,7 +35,7 @@
             WidthRequest="250" />
         <Button
             x:Name="EntrarBtn"
-            Margin="150,0,0,180"
+            Margin="150,0,0,170"
             BackgroundColor="Green"
             Clicked="EntrarBtn_Clicked"
             CornerRadius="20"
