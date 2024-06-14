@@ -1,5 +1,6 @@
 using BetterFinancialControl.Model;
 using BetterFinancialControl.Repository;
+using System.Globalization;
 
 namespace BetterFinancialControl.View;
 
@@ -27,9 +28,9 @@ public partial class Dashboard : ContentPage
         var repository = new DashboardRepository();
         var menuPage = App.Current?.MainPage as MenuPage;
         dash = repository.Buscar(DateTime.Now, menuPage!.usuarioAtual.Id);
-        lblSaldo.Text = dash.Saldo.ToString();
+        lblSaldo.Text = dash.Saldo.ToString("C", CultureInfo.CreateSpecificCulture("pt-BR"));
 
-        lblBalanco.Text = dash.Balanco.ToString();
+        lblBalanco.Text = dash.Balanco.ToString("C", CultureInfo.CreateSpecificCulture("pt-BR"));
         dashboardView.ItemsSource = dash.Movimentacoes;
     }
 

@@ -13,24 +13,26 @@
                 Margin="0,0,0,5"
                 Padding="20"
                 HorizontalOptions="Center">
-                <Label Margin="0,0,10,0" Text="Saldo" />
-                <Label x:Name="lblSaldo" Text="R$20.00" />
+                <Label
+                    x:Name="lblSaldo"
+                    FontSize="30"
+                    Text="R$20.00" />
 
 
-            </HorizontalStackLayout>
-            <HorizontalStackLayout Margin="0,0,0,30" HorizontalOptions="Center">
-                <Label Margin="0,0,10,0" Text="Balanço" />
-                <Label x:Name="lblBalanco" Text="R$20.00" />
             </HorizontalStackLayout>
         </VerticalStackLayout>
 
         <DatePicker
             x:Name="PickerMonth"
-            Margin="0,30,0,0"
+            Margin="0,30,0,20"
             DateSelected="PickerMonth_DateSelected"
+            FontSize="20"
             Format="M"
             HorizontalOptions="Center" />
-        <ListView x:Name="dashboardView">
+        <ListView
+            x:Name="dashboardView"
+            MinimumHeightRequest="300"
+            RowHeight="50">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -84,5 +86,15 @@
             </ListView.ItemTemplate>
         </ListView>
 
+        <HorizontalStackLayout Margin="0,30,0,0" HorizontalOptions="Center">
+            <Label
+                Margin="0,0,10,0"
+                FontSize="20"
+                Text="Balanço Mensal" />
+            <Label
+                x:Name="lblBalanco"
+                FontSize="20"
+                Text="R$20.00" />
+        </HorizontalStackLayout>
     </VerticalStackLayout>
 </ContentPage>
