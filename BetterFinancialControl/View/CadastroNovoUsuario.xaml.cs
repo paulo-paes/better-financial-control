@@ -21,7 +21,9 @@ public partial class CadastroNovoUsuario : ContentPage
 
 		if (string.IsNullOrEmpty(EmailEntry.Text) || string.IsNullOrEmpty(SenhaEntry.Text) || string.IsNullOrEmpty(ConfirmarSenhaEntry.Text))
 		{
-            DisplayAlert("Campos em branco", "Preencha os campos de login e senha!!", "OK");
+            //DisplayAlert("Campos em branco", "Preencha os campos de login e senha!!", "OK");
+            var toast = Toast.Make("Verifique os campos branco");
+            toast.Show();
             return false;
         }
 		else
